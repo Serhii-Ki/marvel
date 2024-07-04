@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.logo {
+  display: block;
+  width: 150px;
+}
+
+.options {
+  display: flex;
+  gap: 5px;
+}
+
+.items {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.text {
+  cursor: pointer;
+}
+
+.text-active {
+  color: rgba(159, 0, 19, 1);
+
+}
