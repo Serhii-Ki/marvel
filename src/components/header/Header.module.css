@@ -25,6 +25,6 @@
 }
 
 .text-active {
-  color: rgba(159, 0, 19, 1);
+  color: var(--main-color);
 
 }
