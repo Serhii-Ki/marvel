@@ -19,7 +19,19 @@ function useRequest() {
   const getAllCharacters = async (): Promise<Character[]> => {
     try{
       startRequest()
-      return await instance.get<CharacterDataWrapper>("/characters?apikey=" + API_KEY)
+      return await instance.get<CharacterDataWrapper>(`/characters?apikey=${API_KEY}`)
+          .then(data => data.data.data.results)
+    } catch (error) {
+      setIsError(true)
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const getCharacter = async (characterId: number): Promise<Character[]> => {
+    try{
+      startRequest()
+      return await instance.get<CharacterDataWrapper>(`/characters/${characterId}?apikey=${API_KEY}`)
           .then(data => data.data.data.results)
     } catch (error) {
       setIsError(true)
@@ -31,7 +43,8 @@ function useRequest() {
   return {
     isLoading,
     isError,
-    getAllCharacters
+    getAllCharacters,
+    getCharacter
   }
 }
 

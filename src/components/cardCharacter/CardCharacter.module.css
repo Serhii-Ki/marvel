@@ -1,0 +1,26 @@
+.card {
+  width: 200px;
+  height: 315px;
+  background-color: rgba(35, 34, 34, 1);
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    box-shadow: 5px 10px 15px 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+  }
+}
+
+.img {
+  width: 200px;
+  height: 200px;
+}
+
+.title {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+}

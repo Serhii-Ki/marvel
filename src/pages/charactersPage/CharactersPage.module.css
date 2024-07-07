@@ -1,0 +1,13 @@
+.load-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  position: relative;
+}
+
+.bg-hero {
+  position: absolute;
+  right: -300px;
+  bottom: -100px;
+  z-index: -1;
+}
