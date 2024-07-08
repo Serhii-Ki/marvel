@@ -1,9 +1,9 @@
 import {useEffect} from "react";
+import {Outlet} from "react-router-dom";
 import useRequest from "./services/useRequest.ts";
 import Header from "./components/header/Header.tsx";
 
 import styles from './App.module.css'
-import CharactersPage from "./pages/charactersPage/CharactersPage.tsx";
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
   return (
       <div className={styles['app-wrapper']}>
         <Header/>
-        <CharactersPage/>
+        <Outlet/>
       </div>
   )
 }

@@ -6,7 +6,7 @@ function useRequest() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
 
-  const API_KEY = 'f603d16d51a9428752c8a79909dec320'
+  const API_KEY = 'apikey=f603d16d51a9428752c8a79909dec320'
   const instance = axios.create({
     baseURL: "https://gateway.marvel.com:443/v1/public",
   })
@@ -19,7 +19,7 @@ function useRequest() {
   const getAllCharacters = async (): Promise<Character[]> => {
     try{
       startRequest()
-      return await instance.get<CharacterDataWrapper>(`/characters?apikey=${API_KEY}`)
+      return await instance.get<CharacterDataWrapper>(`/characters?${API_KEY}`)
           .then(data => data.data.data.results)
     } catch (error) {
       setIsError(true)
@@ -31,7 +31,7 @@ function useRequest() {
   const getCharacter = async (characterId: number): Promise<Character[]> => {
     try{
       startRequest()
-      return await instance.get<CharacterDataWrapper>(`/characters/${characterId}?apikey=${API_KEY}`)
+      return await instance.get<CharacterDataWrapper>(`/characters/${characterId}?${API_KEY}`)
           .then(data => data.data.data.results)
     } catch (error) {
       setIsError(true)
