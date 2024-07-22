@@ -1,11 +1,24 @@
-import styles from './CharactersSection.module.css'
-import CardCharacter from "../cardCharacter/CardCharacter.tsx";
+import {useEffect} from "react";
+import {useSelector} from "react-redux";
 
+import CardCharacter from "../cardCharacter/CardCharacter.tsx";
 import hero from '../../assets/hero.png'
 import CustomBtn from "../customBtn/CustomBtn.tsx";
 import ComicsItem from "../comicsItem/ComicsItem.tsx";
+import {RootState, useAppDispatch} from "../../store/store.ts";
+import {fetchCharacters} from "../../store/charactersThunk.ts";
+
+import styles from './CharactersSection.module.css'
 
 function CharactersSection() {
+  const dispatch = useAppDispatch();
+  const characters = useSelector((state: RootState) => state.characters);
+
+  useEffect(() => {
+    dispatch(fetchCharacters())
+  }, [dispatch]);
+
+  console.log(characters);
   return (
       <main className={styles.wrapper}>
 
