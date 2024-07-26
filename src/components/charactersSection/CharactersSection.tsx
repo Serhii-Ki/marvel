@@ -18,7 +18,6 @@ function CharactersSection() {
     dispatch(fetchCharacters())
   }, [dispatch]);
 
-  console.log(characters);
   return (
       <main className={styles.wrapper}>
 
