@@ -4,3 +4,9 @@
   padding: 0 20px 40px 20px;
   position: relative;
 }
+
+.app-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,8 +1,9 @@
-import {createBrowserRouter, Navigate} from "react-router-dom";
+import {createBrowserRouter, redirect} from "react-router-dom";
 import App from "../App.tsx";
-import CharactersPage from "../pages/charactersPage/CharactersPage.tsx";
-import ComicsPage from "../pages/comicsPage/ComicsPage.tsx";
-import ErrorPage from "../pages/errorPage/ErrorPage.tsx";
+import Auth from "../pages/auth/Auth.tsx";
+import SignIn from "../pages/signIn/SignIn.tsx";
+import SignUp from "../pages/signUp/SignUp.tsx";
+import ErrorPage from "../pages/ErrorPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -11,16 +12,20 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage/>,
     children: [
       {
-        path: '/',
-        element: <Navigate to="/characters" replace />,
+        path: '/auth',
+        element: <Auth/>
       },
       {
-        path: '/characters',
-        element: <CharactersPage/>
+        path: '/signin',
+        element: <SignIn/>
       },
       {
-        path: '/comics',
-        element: <ComicsPage/>
+        path: '/signup',
+        element: <SignUp/>
+      },
+      {
+        index: true,
+        loader: () => redirect('/auth')
       }
     ]
   }
