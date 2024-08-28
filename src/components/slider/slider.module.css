@@ -1,0 +1,48 @@
+.sliderWrapper {
+
+}
+
+.slideWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sliderImg {
+  height: 300px;
+  object-fit: cover;
+}
+
+.sliderTitle {
+  margin-top: 80px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sliderText {
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(163, 162, 187);
+}
+
+.sliderDotsWrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 17px;
+}
+
+.sliderDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(186, 232, 232);
+  margin-top: 60px;
+  cursor: pointer;
+
+  &.active {
+    background-color: var(--main-color);
+    transform: scale(1.7);
+  }
+}
