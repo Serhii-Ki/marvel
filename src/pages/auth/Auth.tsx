@@ -1,6 +1,7 @@
 import styles from "./auth.module.css";
 import Slider, { SlideType } from "../../components/slider/Slider.tsx";
 import CustomBtn from "../../components/customBtn/CustomBtn.tsx";
+import { useNavigate } from "react-router-dom";
 
 const slides: SlideType[] = [
   {
@@ -26,12 +27,18 @@ const slides: SlideType[] = [
 ];
 
 function Auth() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.authWrapper}>
       <Slider slides={slides} />
       <div className={styles.btnWrapper}>
-        <CustomBtn title="REGISTER" />
-        <CustomBtn title="LOGIN" mode="main" />
+        <CustomBtn title="REGISTER" onClick={() => navigate("/signup")} />
+        <CustomBtn
+          title="LOGIN"
+          mode="main"
+          onClick={() => navigate("/signin")}
+        />
       </div>
     </div>
   );

@@ -1,11 +1,12 @@
 import cn from "classnames";
 
 import styles from "./customBtn.module.css";
+import { ButtonHTMLAttributes } from "react";
 
 type Props = {
   title: string;
   mode?: "main";
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 function CustomBtn(props: Props) {
   return (
