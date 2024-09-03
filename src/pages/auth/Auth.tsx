@@ -1,5 +1,6 @@
 import styles from "./auth.module.css";
 import Slider, { SlideType } from "../../components/slider/Slider.tsx";
+import CustomBtn from "../../components/customBtn/CustomBtn.tsx";
 
 const slides: SlideType[] = [
   {
@@ -28,6 +29,10 @@ function Auth() {
   return (
     <div className={styles.authWrapper}>
       <Slider slides={slides} />
+      <div className={styles.btnWrapper}>
+        <CustomBtn title="REGISTER" />
+        <CustomBtn title="LOGIN" mode="main" />
+      </div>
     </div>
   );
 }

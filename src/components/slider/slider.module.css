@@ -1,5 +1,9 @@
 .sliderWrapper {
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
 }
 
 .slideWrap {
@@ -14,20 +18,20 @@
 }
 
 .sliderTitle {
-  margin-top: 80px;
   font-size: 20px;
   font-weight: 700;
+  margin-top: 10px;
 }
 
 .sliderText {
-  margin-top: 20px;
   font-size: 16px;
   font-weight: 600;
   color: rgb(163, 162, 187);
+  text-align: center;
+  margin-top: 20px;
 }
 
 .sliderDotsWrap {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 17px;

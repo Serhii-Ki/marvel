@@ -1,2 +1,14 @@
 .authWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 40px 20px;
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 8%;
+  margin-top: 40px;
 }
