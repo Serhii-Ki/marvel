@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
       },
       {
         index: true,
-        loader: () => redirect("/signup"),
+        loader: () => redirect("/signin"),
       },
     ],
   },

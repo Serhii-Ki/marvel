@@ -42,7 +42,7 @@ function SignUp() {
           onChange={formik.handleChange}
           value={formik.values.confirmPassword}
         />
-        <CustomBtn type="submit" title="sign up" mode="main" />
+        <CustomBtn type="submit" title="signup" mode="main" />
       </form>
       <Link to="/signin">I already have an account</Link>
     </div>
