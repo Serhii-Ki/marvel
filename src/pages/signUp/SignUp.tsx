@@ -4,16 +4,20 @@ import CustomBtn from "../../components/customBtn/CustomBtn.tsx";
 import { Link } from "react-router-dom";
 
 import styles from "./signUp.module.css";
+import { useAppDispatch } from "../../store/store.ts";
+import { authThunks } from "../../store/authSlice.ts";
 
 function SignUp() {
+  const dispatch = useAppDispatch();
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
-      confirmPassword: "",
+      confirm_password: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      dispatch(authThunks.signUp(values));
     },
   });
 
@@ -22,7 +26,7 @@ function SignUp() {
       <h2>Registration</h2>
       <form className={styles.signupForm} onSubmit={formik.handleSubmit}>
         <CustomInput
-          type="email"
+          type="text"
           placeholder="email"
           name="email"
           onChange={formik.handleChange}
@@ -38,9 +42,9 @@ function SignUp() {
         <CustomInput
           type="password"
           placeholder="confirm password"
-          name="confirmPassword"
+          name="confirm_password"
           onChange={formik.handleChange}
-          value={formik.values.confirmPassword}
+          value={formik.values.confirm_password}
         />
         <CustomBtn type="submit" title="signup" mode="main" />
       </form>
