@@ -1,5 +1,6 @@
 import { instance } from "./instance.ts";
 import {
+  ResponseSignInType,
   ResponseSignUpType,
   SignInType,
   SignUpType,
@@ -11,7 +12,7 @@ export function useAuth() {
   };
 
   const signIn = (userData: SignInType) => {
-    instance().post("signin", userData);
+    instance().post<ResponseSignInType>("signin", userData);
   };
 
   return {

@@ -18,10 +18,11 @@ const initialState: AuthStateType = {
 const slice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    setToken(state, action: PayloadAction<string>) {
-      state.token = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(signUp.fulfilled, (state, action) => {
+      state.token = action.payload.jwt;
+    });
   },
 });
 

@@ -6,13 +6,26 @@ import { Link } from "react-router-dom";
 import styles from "./signIn.module.css";
 
 function SignIn() {
+  const fetchSignIn = async () => {
+    const res = await fetch("http://49.13.31.246:9191/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: formik.values.email,
+        password: formik.values.password,
+      }),
+    });
+    console.log(res);
+  };
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      fetchSignIn();
     },
   });
 
@@ -21,7 +34,7 @@ function SignIn() {
       <h2>Enter your details</h2>
       <form className={styles.signinForm} onSubmit={formik.handleSubmit}>
         <CustomInput
-          type="email"
+          type="text"
           placeholder="email"
           name="email"
           onChange={formik.handleChange}
