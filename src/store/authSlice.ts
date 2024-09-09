@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   ErrorType,
+  ResponseSignInType,
   ResponseSignUpType,
+  SignInType,
   SignUpType,
 } from "../utils/types/authTypes.ts";
 import { useAuth } from "../utils/services/useAuth.ts";
@@ -18,11 +20,19 @@ const initialState: AuthStateType = {
 const slice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setToken(state, action: PayloadAction<{ token: string }>) {
+      state.token = action.payload.token;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(signUp.fulfilled, (state, action) => {
-      state.token = action.payload.jwt;
-    });
+    builder
+      .addCase(signUp.fulfilled, (state, action) => {
+        state.token = action.payload.jwt;
+      })
+      .addCase(signIn.fulfilled, (state, action) => {
+        state.token = action.payload.jwt;
+      });
   },
 });
 
@@ -35,8 +45,25 @@ const signUp = createAsyncThunk<
   dispatch(appActions.setLoadingStatus({ isLoading: true }));
   try {
     const res = await useAuth().signUp(userData);
-    console.log(res);
-    return res;
+    return res.data;
+  } catch (err) {
+    return rejectWithValue(err);
+  } finally {
+    dispatch(appActions.setLoadingStatus({ isLoading: false }));
+  }
+});
+
+const signIn = createAsyncThunk<
+  ResponseSignInType,
+  SignInType,
+  { rejectValue: ErrorType }
+>(`${slice.name}/signin`, async (userData, thunkAPI) => {
+  const { dispatch, rejectWithValue } = thunkAPI;
+  dispatch(appActions.setLoadingStatus({ isLoading: true }));
+  try {
+    const res = await useAuth().signIn(userData);
+    console.log(res.data);
+    return res.data;
   } catch (err) {
     return rejectWithValue(err);
   } finally {
@@ -49,6 +76,6 @@ export const authActions = slice.actions;
 
 export const selectAuth = (state: { auth: AuthStateType }) => state.auth;
 
-export const authThunks = { signUp };
+export const authThunks = { signUp, signIn };
 
 export const authPath = "auth";

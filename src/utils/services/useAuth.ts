@@ -8,11 +8,11 @@ import {
 
 export function useAuth() {
   const signUp = (userData: SignUpType) => {
-    instance().post<ResponseSignUpType>("signup", userData);
+    return instance().post<ResponseSignUpType>("signup", userData);
   };
 
   const signIn = (userData: SignInType) => {
-    instance().post<ResponseSignInType>("signin", userData);
+    return instance().post<ResponseSignInType>("signin", userData);
   };
 
   return {

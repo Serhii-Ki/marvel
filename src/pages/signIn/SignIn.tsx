@@ -4,28 +4,18 @@ import CustomBtn from "../../components/customBtn/CustomBtn.tsx";
 import { Link } from "react-router-dom";
 
 import styles from "./signIn.module.css";
+import { useAppDispatch } from "../../store/store.ts";
+import { authThunks } from "../../store/authSlice.ts";
 
 function SignIn() {
-  const fetchSignIn = async () => {
-    const res = await fetch("http://49.13.31.246:9191/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: formik.values.email,
-        password: formik.values.password,
-      }),
-    });
-    console.log(res);
-  };
+  const dispatch = useAppDispatch();
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     onSubmit: (values) => {
-      fetchSignIn();
+      dispatch(authThunks.signIn(values));
     },
   });
 
@@ -36,9 +26,9 @@ function SignIn() {
         <CustomInput
           type="text"
           placeholder="email"
-          name="email"
+          name="username"
           onChange={formik.handleChange}
-          value={formik.values.email}
+          value={formik.values.username}
         />
         <CustomInput
           type="password"

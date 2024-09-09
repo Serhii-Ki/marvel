@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { appPath, appReducer } from "./appSlice.ts";
-import { authPath, authReducer } from "./authSlice.ts";
+import { appReducer, appPath } from "./appSlice"; // Предполагается, что appSlice существует
+import { authReducer, authPath } from "./authSlice"; // Предполагается, что authSlice существует
 
 export const store = configureStore({
   reducer: {

@@ -10,21 +10,6 @@ import { authThunks } from "../../store/authSlice.ts";
 function SignUp() {
   const dispatch = useAppDispatch();
 
-  // const fetchSignUp = async () => {
-  //   const res = await fetch("http://49.13.31.246:9191/signup", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       username: formik.values.email,
-  //       password: formik.values.password,
-  //       confirm_password: formik.values.confirm_password,
-  //     }),
-  //   });
-  //   console.log(res);
-  // };
-
   const formik = useFormik({
     initialValues: {
       username: "",
