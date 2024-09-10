@@ -6,6 +6,7 @@ import SignUp from "../pages/signUp/SignUp.tsx";
 import ErrorPage from "../pages/ErrorPage.tsx";
 import AuthLayout from "../layouts/authLayout/AuthLayout.tsx";
 import MainLayout from "../layouts/mainLayout/MainLayout.tsx";
+import Dashboard from "../pages/dashboard/Dashboard.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -34,11 +35,16 @@ export const router = createBrowserRouter([
       {
         path: "/bankingonline",
         element: <MainLayout />,
-        children: [{}],
+        children: [
+          {
+            path: "/bankingonline/dashboard",
+            element: <Dashboard />,
+          },
+        ],
       },
       {
         index: true,
-        loader: () => redirect("/bankingonline"),
+        loader: () => redirect("/bankingonline/dashboard"),
       },
     ],
   },
