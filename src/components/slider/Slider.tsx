@@ -38,7 +38,7 @@ function Slider({ slides }: Props) {
       {slides.map((slide, index) => {
         if (activeSlide === index) {
           return (
-            <div className={styles.slideWrap}>
+            <div key={index} className={styles.slideWrap}>
               <img
                 src={slide.img}
                 alt={slide.title}
@@ -56,6 +56,7 @@ function Slider({ slides }: Props) {
         {slides.map((_, index) => {
           return (
             <span
+              key={index}
               onClick={() => handleSlideChange(index)}
               className={cn(styles.sliderDot, {
                 [styles.active]: activeSlide === index,

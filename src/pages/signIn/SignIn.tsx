@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import CustomInput from "../../components/customInput/CustomInput.tsx";
 import CustomBtn from "../../components/customBtn/CustomBtn.tsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./signIn.module.css";
 import { useAppDispatch } from "../../store/store.ts";
@@ -9,13 +9,14 @@ import { authThunks } from "../../store/authSlice.ts";
 
 function SignIn() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
     },
     onSubmit: (values) => {
-      dispatch(authThunks.signIn(values));
+      dispatch(authThunks.signIn({ userData: values, navigate }));
     },
   });
 

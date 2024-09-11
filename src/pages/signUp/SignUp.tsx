@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import CustomInput from "../../components/customInput/CustomInput.tsx";
 import CustomBtn from "../../components/customBtn/CustomBtn.tsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./signUp.module.css";
 import { useAppDispatch } from "../../store/store.ts";
@@ -9,7 +9,7 @@ import { authThunks } from "../../store/authSlice.ts";
 
 function SignUp() {
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -17,7 +17,7 @@ function SignUp() {
       confirm_password: "",
     },
     onSubmit: (values) => {
-      dispatch(authThunks.signUp(values));
+      dispatch(authThunks.signUp({ userData: values, navigate }));
     },
   });
 

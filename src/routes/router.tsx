@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "../App.tsx";
 import Auth from "../pages/auth/Auth.tsx";
 import SignIn from "../pages/signIn/SignIn.tsx";
@@ -41,10 +41,6 @@ export const router = createBrowserRouter([
             element: <Dashboard />,
           },
         ],
-      },
-      {
-        index: true,
-        loader: () => redirect("/bankingonline/dashboard"),
       },
     ],
   },

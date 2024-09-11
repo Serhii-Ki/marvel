@@ -14,7 +14,9 @@ export type ResponseSignUpType = {
   jwt: string;
 };
 
-export type ResponseSignInType = Omit<ResponseSignUpType, "id">;
+export type ResponseSignInType = {
+  token: string;
+};
 
 export type ErrorType = {
   message: string;

@@ -8,6 +8,7 @@ import {
 } from "../utils/types/authTypes.ts";
 import { useAuth } from "../utils/services/useAuth.ts";
 import { appActions } from "./appSlice.ts";
+import { NavigateFunction } from "react-router-dom";
 
 type AuthStateType = {
   token: string;
@@ -29,22 +30,25 @@ const slice = createSlice({
     builder
       .addCase(signUp.fulfilled, (state, action) => {
         state.token = action.payload.jwt;
+        localStorage.setItem("jwt", action.payload.jwt);
       })
       .addCase(signIn.fulfilled, (state, action) => {
-        state.token = action.payload.jwt;
+        state.token = action.payload.token;
+        localStorage.setItem("jwt", action.payload.token);
       });
   },
 });
 
 const signUp = createAsyncThunk<
   ResponseSignUpType,
-  SignUpType,
+  { userData: SignUpType; navigate: NavigateFunction }, // Добавляем navigate в параметры
   { rejectValue: ErrorType }
->(`${slice.name}/signup`, async (userData, thunkAPI) => {
+>(`${slice.name}/signup`, async ({ userData, navigate }, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
   dispatch(appActions.setLoadingStatus({ isLoading: true }));
   try {
     const res = await useAuth().signUp(userData);
+    navigate("/bankingonline/dashboard");
     return res.data;
   } catch (err) {
     return rejectWithValue(err);
@@ -55,14 +59,15 @@ const signUp = createAsyncThunk<
 
 const signIn = createAsyncThunk<
   ResponseSignInType,
-  SignInType,
+  { userData: SignInType; navigate: NavigateFunction }, // Добавляем navigate в параметры
   { rejectValue: ErrorType }
->(`${slice.name}/signin`, async (userData, thunkAPI) => {
+>(`${slice.name}/signin`, async ({ userData, navigate }, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
   dispatch(appActions.setLoadingStatus({ isLoading: true }));
   try {
     const res = await useAuth().signIn(userData);
-    console.log(res.data);
+    // Навигация после успешного логина
+    navigate("/bankingonline/dashboard");
     return res.data;
   } catch (err) {
     return rejectWithValue(err);
