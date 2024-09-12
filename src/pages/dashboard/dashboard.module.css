@@ -12,12 +12,12 @@
   flex-direction: column;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 .topIcons {
   display: flex;
-  gap: 30px;
+  gap: 40px;
 }
 
 .item {
