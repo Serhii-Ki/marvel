@@ -1,7 +1,11 @@
 import { instance } from "./instance.ts";
 
 export function useUser() {
-  const getUser = (token: string) => {
+  const getUser = () => {
     return instance().get("me");
+  };
+
+  return {
+    getUser,
   };
 }

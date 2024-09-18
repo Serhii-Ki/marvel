@@ -5,8 +5,11 @@ import qr from "../../assets/icons/qrCode.svg";
 import scan from "../../assets/icons/scanCode.svg";
 
 import styles from "./dashboard.module.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/userSlice.ts";
 
 function Dashboard(props) {
+  const userData = useSelector(selectUser);
   return (
     <div className={styles.wrapper}>
       <div className={styles.topPanel}>
@@ -30,7 +33,7 @@ function Dashboard(props) {
         </div>
         <div className={styles.balance}>
           <p>Balance in the wallet</p>
-          <p className={styles.bold}>$ 400</p>
+          <p className={styles.bold}>$ {userData.balance}</p>
         </div>
       </div>
       <div className={styles.mainPanel}></div>

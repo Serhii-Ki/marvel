@@ -41,7 +41,7 @@ const slice = createSlice({
 
 const signUp = createAsyncThunk<
   ResponseSignUpType,
-  { userData: SignUpType; navigate: NavigateFunction }, // Добавляем navigate в параметры
+  { userData: SignUpType; navigate: NavigateFunction },
   { rejectValue: ErrorType }
 >(`${slice.name}/signup`, async ({ userData, navigate }, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
@@ -63,16 +63,14 @@ const signIn = createAsyncThunk<
   { rejectValue: ErrorType }
 >(`${slice.name}/signin`, async ({ userData, navigate }, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
-  dispatch(appActions.setLoadingStatus({ isLoading: true }));
+
   try {
     const res = await useAuth().signIn(userData);
-    // Навигация после успешного логина
     navigate("/bankingonline/dashboard");
     return res.data;
   } catch (err) {
     return rejectWithValue(err);
   } finally {
-    dispatch(appActions.setLoadingStatus({ isLoading: false }));
   }
 });
 
