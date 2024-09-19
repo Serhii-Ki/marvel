@@ -7,14 +7,23 @@ import scan from "../../assets/icons/scanCode.svg";
 import styles from "./dashboard.module.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/userSlice.ts";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard(props) {
   const userData = useSelector(selectUser);
+  const navigate = useNavigate();
+
+  const handleClick = (path: string) => {
+    navigate(path);
+  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.topPanel}>
         <div className={styles.topIcons}>
-          <div className={styles.item}>
+          <div
+            className={styles.item}
+            onClick={() => handleClick("/bankingonline/wallet")}
+          >
             <img src={wallet} alt="wallet" className={styles.icons} />
             <span>wallet</span>
           </div>

@@ -7,6 +7,7 @@ import ErrorPage from "../pages/ErrorPage.tsx";
 import AuthLayout from "../layouts/authLayout/AuthLayout.tsx";
 import MainLayout from "../layouts/mainLayout/MainLayout.tsx";
 import Dashboard from "../pages/dashboard/Dashboard.tsx";
+import Wallet from "../pages/wallet/Wallet.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
           {
             path: "/bankingonline/dashboard",
             element: <Dashboard />,
+          },
+          {
+            path: "/bankingonline/wallet",
+            element: <Wallet />,
           },
         ],
       },
