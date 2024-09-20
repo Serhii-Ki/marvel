@@ -5,7 +5,12 @@ export function useUser() {
     return instance().get("me");
   };
 
+  const depositMoney = (count: number) => {
+    return instance().put("me", { balance: count });
+  };
+
   return {
     getUser,
+    depositMoney,
   };
 }

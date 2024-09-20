@@ -46,6 +46,22 @@ export const getUser = createAsyncThunk<
   }
 });
 
+export const depositMoney = createAsyncThunk(
+  `${slice.name}/depositMoney`,
+  async (count, thunkAPI) => {
+    const { dispatch, rejectWithValue } = thunkAPI;
+    dispatch(appActions.setLoadingStatus({ isLoading: true }));
+    try {
+      await useUser().depositMoney(count);
+      dispatch(getUser());
+    } catch (err) {
+      return rejectWithValue(err);
+    } finally {
+      dispatch(appActions.setLoadingStatus({ isLoading: false }));
+    }
+  },
+);
+
 export const userReducer = slice.reducer;
 
 export const selectUser = (state: { user: UserType }) => state.user;
@@ -54,4 +70,4 @@ export const userActions = slice.actions;
 
 export const userPath = "user";
 
-export const userThunks = { getUser };
+export const userThunks = { getUser, depositMoney };
