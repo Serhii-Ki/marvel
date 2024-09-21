@@ -26,6 +26,9 @@ const slice = createSlice({
     setUser(state, action: PayloadAction<UserType>) {
       return action.payload;
     },
+    updateUser(state, action: PayloadAction<Partial<UserType>>) {
+      return { ...state, ...action.payload };
+    },
   },
 });
 
@@ -37,7 +40,7 @@ export const getUser = createAsyncThunk<
   try {
     dispatch(appActions.setLoadingStatus({ isLoading: true }));
     const res = await useUser().getUser();
-    dispatch(slice.actions.setUser(res.data));
+    dispatch(userActions.setUser(res.data));
     return res.data;
   } catch (err) {
     return rejectWithValue(err);
@@ -46,21 +49,22 @@ export const getUser = createAsyncThunk<
   }
 });
 
-export const depositMoney = createAsyncThunk(
-  `${slice.name}/depositMoney`,
-  async (count, thunkAPI) => {
-    const { dispatch, rejectWithValue } = thunkAPI;
-    dispatch(appActions.setLoadingStatus({ isLoading: true }));
-    try {
-      await useUser().depositMoney(count);
-      dispatch(getUser());
-    } catch (err) {
-      return rejectWithValue(err);
-    } finally {
-      dispatch(appActions.setLoadingStatus({ isLoading: false }));
-    }
-  },
-);
+export const depositMoney = createAsyncThunk<
+  UserType,
+  number,
+  { rejectValue: ErrorType }
+>(`${slice.name}/depositMoney`, async (count, thunkAPI) => {
+  const { dispatch, rejectWithValue } = thunkAPI;
+  dispatch(appActions.setLoadingStatus({ isLoading: true }));
+  try {
+    const res = await useUser().depositMoney(count);
+    dispatch(userActions.updateUser({ balance: res.data.balance }));
+  } catch (err) {
+    return rejectWithValue(err);
+  } finally {
+    dispatch(appActions.setLoadingStatus({ isLoading: false }));
+  }
+});
 
 export const userReducer = slice.reducer;
 
