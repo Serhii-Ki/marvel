@@ -15,8 +15,13 @@ export function useAuth() {
     return instance().post<ResponseSignInType>("signin", userData);
   };
 
+  const logOut = () => {
+    return instance().post("destroy-session");
+  };
+
   return {
     signUp,
     signIn,
+    logOut,
   };
 }

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App.tsx";
 import Auth from "../pages/auth/Auth.tsx";
 import SignIn from "../pages/signIn/SignIn.tsx";
@@ -15,6 +15,10 @@ export const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/",
+        element: <Navigate to="/auth" replace />,
+      },
       {
         path: "/",
         element: <AuthLayout />,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CustomInput from "../../components/customInput/CustomInput.tsx";
 import CustomBtn from "../../components/customBtn/CustomBtn.tsx";
-import { depositMoney, selectUser, userThunks } from "../../store/userSlice.ts";
+import { selectUser, userThunks } from "../../store/userSlice.ts";
 import { useAppDispatch } from "../../store/store.ts";
 import { useSelector } from "react-redux";
 

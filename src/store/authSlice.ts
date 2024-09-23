@@ -59,11 +59,11 @@ const signUp = createAsyncThunk<
 
 const signIn = createAsyncThunk<
   ResponseSignInType,
-  { userData: SignInType; navigate: NavigateFunction }, // Добавляем navigate в параметры
+  { userData: SignInType; navigate: NavigateFunction },
   { rejectValue: ErrorType }
 >(`${slice.name}/signin`, async ({ userData, navigate }, thunkAPI) => {
   const { dispatch, rejectWithValue } = thunkAPI;
-
+  dispatch(appActions.setLoadingStatus({ isLoading: true }));
   try {
     const res = await useAuth().signIn(userData);
     navigate("/bankingonline/dashboard");
@@ -71,14 +71,32 @@ const signIn = createAsyncThunk<
   } catch (err) {
     return rejectWithValue(err);
   } finally {
+    dispatch(appActions.setLoadingStatus({ isLoading: false }));
   }
 });
+
+const logOut = createAsyncThunk(
+  `${slice.name}/logout`,
+  async ({ navigate }, thunkAPI) => {
+    const { dispatch, rejectWithValue } = thunkAPI;
+    dispatch(appActions.setLoadingStatus({ isLoading: true }));
+    try {
+      await useAuth().logOut();
+      localStorage.removeItem("jwt");
+      navigate("/auth");
+    } catch (err) {
+      return rejectWithValue(err);
+    } finally {
+      dispatch(appActions.setLoadingStatus({ isLoading: false }));
+    }
+  },
+);
 
 export const authReducer = slice.reducer;
 export const authActions = slice.actions;
 
 export const selectAuth = (state: { auth: AuthStateType }) => state.auth;
 
-export const authThunks = { signUp, signIn };
+export const authThunks = { signUp, signIn, logOut };
 
 export const authPath = "auth";
